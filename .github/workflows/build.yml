@@ -11,9 +11,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Inspect Xcode project
+      - name: Build plugin
         run: |
-          xcodebuild -list -project "Dorop/Builds/MacOSX/DoropEngine.xcodeproj"
+          xcodebuild \
+            -project "Dorop/Builds/MacOSX/DoropEngine.xcodeproj" \
+            -list
 
       - name: Upload VST3
         uses: actions/upload-artifact@v4
