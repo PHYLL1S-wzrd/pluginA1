@@ -8,23 +8,36 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - run: git clone --depth 1 https://github.com/christophhart/HISE.git hise-src
+      - name: Clone HISE
+        run: git clone --depth 1 https://github.com/christophhart/HISE.git hise-src
 
-      - run: unzip hise-src/tools/SDK/sdk.zip -d hise-src/tools/SDK
+      - name: Unzip SDK
+        run: unzip hise-src/tools/SDK/sdk.zip -d hise-src/tools/SDK
 
-      - run: |
-          chmod +x "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer"
-          "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer" --resave "hise-src/projects/standalone/HISE Standalone.jucer"
+      - name: Make Projucer executable
+        run: chmod +x "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer"
 
-      - run: ls -R hise-src/projects/standalone/Builds/MacOSX
+      - name: Resave project
+        run: >
+          "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer"
+          --resave "hise-src/projects/standalone/HISE Standalone.jucer"
 
-      - run: xcodebuild -project "hise-src/projects/standalone/Builds/MacOSX/HISE Standalone.xcodeproj" -configuration Release
+      - name: Build HISE
+        run: |
+          xcodebuild \
+            -project "hise-src/projects/standalone/Builds/MacOSX/HISE Standalone.xcodeproj" \
+            -configuration Release
 
-      - run: "${{ github.workspace }}/hise-src/projects/standalone/Builds/MacOSX/build/Release/HISE.app/Contents/MacOS/HISE" export_ci "${{ github.workspace }}/Dorop/Presets/Dorop.hip" -t:instrument -p:VST3 -a:x64
+      - name: Export plugin (HISE CI)
+        run: |
+          APP="hise-src/projects/standalone/Builds/MacOSX/build/Release/HISE.app/Contents/MacOS/HISE"
+          "$APP" export_ci "${{ github.workspace }}/Dorop/XmlPresetBackups/dorop.xml" -t:instrument -p:VST3 -a:x64
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload VST3
+        uses: actions/upload-artifact@v4
         with:
           name: plugin-mac
           path: "**/*.vst3"
