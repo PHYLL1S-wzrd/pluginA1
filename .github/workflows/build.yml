@@ -18,6 +18,8 @@ jobs:
           chmod +x "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer"
           "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer" --resave "hise-src/projects/standalone/HISE Standalone.jucer"
 
+      - run: ls -R hise-src/projects/standalone/Builds/MacOSX
+
       - run: xcodebuild -project "hise-src/projects/standalone/Builds/MacOSX/HISE Standalone.xcodeproj" -configuration Release
 
       - run: "${{ github.workspace }}/hise-src/projects/standalone/Builds/MacOSX/build/Release/HISE.app/Contents/MacOS/HISE" export_ci "${{ github.workspace }}/Dorop/Presets/Dorop.hip" -t:instrument -p:VST3 -a:x64
