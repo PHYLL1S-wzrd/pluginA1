@@ -11,9 +11,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: List schemes
+      - name: Inspect project structure
         run: |
-          xcodebuild -list -project "Dorop/Builds/MacOSX/DoropEngine.xcodeproj"
+          ls -R Dorop/Builds/MacOSX
 
       - name: Upload VST3
         uses: actions/upload-artifact@v4
