@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Processor Type="SynthChain" ID="dorop" Bypassed="0" Gain="1.0" Balance="0.0"
+           VoiceLimit="64.0" KillFadeTime="20.0" IconColour="0" packageName=""
+           BuildVersion="650">
+  <ChildProcessors>
+    <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
+      <ChildProcessors>
+        <Processor Type="ScriptProcessor" ID="Interface" Bypassed="0">
+          <ChildProcessors/>
+          <Content>
+            <Control type="ScriptSlider" id="MARS" value="0.0"/>
+            <Control type="ScriptSlider" id="rose" value="0.0"/>
+            <Control type="ScriptSlider" id="forty" value="0.0"/>
+            <Control type="ScriptButton" id="Link" value="0.0"/>
+          </Content>
+          <UIData Source="doropUIData"/>
+        </Processor>
+      </ChildProcessors>
+    </Processor>
+    <Processor Type="ModulatorChain" ID="GainModulation" Bypassed="0" Intensity="1.0">
+      <ChildProcessors/>
+    </Processor>
+    <Processor Type="ModulatorChain" ID="PitchModulation" Bypassed="1" Intensity="0.0">
+      <ChildProcessors/>
+    </Processor>
+    <Processor Type="EffectChain" ID="FX" Bypassed="0">
+      <ChildProcessors>
+        <Processor Type="SimpleReverb" ID="Simple Reverb1" Bypassed="0" RoomSize="0.0"
+                   Damping="0.699999988079071" WetLevel="0.0" DryLevel="1.0" Width="0.800000011920929"
+                   FreezeMode="0.1000000014901161">
+          <ChildProcessors/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+        </Processor>
+        <Processor Type="ShapeFX" ID="Shape FX1" Bypassed="0" Curve="" BiasLeft="0.2800000011920929"
+                   BiasRight="-0.2800000011920929" HighPass="20.0" LowPass="20000.0"
+                   Mode="1.0" Oversampling="3.0" Gain="9.100000381469727" Reduce="14.0"
+                   Autogain="1.0" LimitInput="1.0" Drive="0.0" Mix="0.0" BypassFilters="0.0">
+          <ChildProcessors/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+        </Processor>
+        <Processor Type="Delay" ID="Delay1" Bypassed="0" DelayTimeLeft="6.0" DelayTimeRight="5.0"
+                   FeedbackLeft="0.6000000238418579" FeedbackRight="0.6000000238418579"
+                   LowPassFreq="20000.0" HiPassFreq="40.0" Mix="0.0" TempoSync="1.0">
+          <ChildProcessors/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+        </Processor>
+        <Processor Type="PhaseFX" ID="Phase FX1" Bypassed="0" Frequency1="0.0" Frequency2="1600.0"
+                   Feedback="0.699999988079071" Mix="0.0">
+          <ChildProcessors>
+            <Processor Type="ModulatorChain" ID="Phase Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors>
+                <Processor Type="LFO" ID="LFO Modulator1" Bypassed="0" Intensity="1.0" Frequency="0.0"
+                           FadeIn="2403.199951171875" WaveformType="3.0" Legato="1.0" TempoSync="1.0"
+                           SmoothingTime="575.8300170898438" LoopEnabled="1.0" PhaseOffset="0.9200000166893005"
+                           SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform=""
+                           StepData="64.rGEt9....7CWOJzO35QA+Lb8n5CWOJjOJb8n9v0iB7Cov0yOw0iB+DWOJ5i8nvsOMyLC+vdT37SJb8zOgqGE+.">
+                  <ChildProcessors>
+                    <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
+                      <ChildProcessors/>
+                    </Processor>
+                    <Processor Type="ModulatorChain" ID="LFO Frequency Mod" Bypassed="0" Intensity="1.0">
+                      <ChildProcessors/>
+                    </Processor>
+                  </ChildProcessors>
+                </Processor>
+              </ChildProcessors>
+            </Processor>
+          </ChildProcessors>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+        </Processor>
+        <Processor Type="ScriptFX" ID="Script FX1" Bypassed="0" NumDisplayBuffers="1">
+          <ChildProcessors/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+          <Content/>
+          <Networks>
+            <Network ID="script_fx1" Version="0.0.0">
+              <Node FactoryPath="container.chain" ID="script_fx1" Bypassed="0" Name="script_fx1"
+                    ShowParameters="1">
+                <Nodes>
+                  <Node ID="jchorus" FactoryPath="jdsp.jchorus" Bypassed="0" Name="jchorus">
+                    <Parameters>
+                      <Parameter MinValue="0.0" MaxValue="100.0" ID="CentreDelay" Value="100.0"
+                                 DefaultValue="7.0"/>
+                      <Parameter MinValue="0.0" MaxValue="1.0" ID="Depth" Value="0.6175738525390625"
+                                 DefaultValue="0.25"/>
+                      <Parameter MinValue="-1.0" MaxValue="1.0" ID="Feedback" Value="-2.441406249387157e-7"
+                                 DefaultValue="0.0"/>
+                      <Parameter MinValue="0.0" MaxValue="100.0" SkewFactor="0.3010300099849701"
+                                 ID="Rate" Value="0.6482209718985599" DefaultValue="1.0"/>
+                      <Parameter MinValue="0.0" MaxValue="1.0" ID="Mix" DefaultValue="0.5" Automated="1"/>
+                    </Parameters>
+                  </Node>
+                  <Node ID="sampleandhold" FactoryPath="fx.sampleandhold" Bypassed="0"
+                        Name="sampleandhold">
+                    <Parameters>
+                      <Parameter MinValue="1.0" MaxValue="2.0" StepSize="0.1" ID="Counter" DefaultValue="1.0"
+                                 Automated="1"/>
+                    </Parameters>
+                  </Node>
+                </Nodes>
+                <Parameters>
+                  <Parameter MinValue="0.0" MaxValue="1.0" ID="granulax" Value="1.0" DefaultValue="0.0">
+                    <Connections>
+                      <Connection NodeId="jchorus" ParameterId="Mix"/>
+                      <Connection NodeId="sampleandhold" ParameterId="Counter"/>
+                    </Connections>
+                  </Parameter>
+                </Parameters>
+              </Node>
+            </Network>
+          </Networks>
+          <UIData>
+            <ContentProperties DeviceType="Desktop"/>
+          </UIData>
+        </Processor>
+      </ChildProcessors>
+    </Processor>
+    <Processor Type="SineSynth" ID="Sine Wave Generator1" Bypassed="0" Gain="0.25"
+               Balance="0.0" VoiceLimit="256.0" KillFadeTime="20.0" IconColour="0"
+               OctaveTranspose="0.0" SemiTones="0.0" UseFreqRatio="0.0" CoarseFreqRatio="1.0"
+               FineFreqRatio="0.0" SaturationAmount="0.0">
+      <ChildProcessors>
+        <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
+          <ChildProcessors/>
+        </Processor>
+        <Processor Type="ModulatorChain" ID="GainModulation" Bypassed="0" Intensity="1.0">
+          <ChildProcessors>
+            <Processor Type="SimpleEnvelope" ID="DefaultEnvelope1" Bypassed="0" Monophonic="0.0"
+                       Retrigger="1.0" Intensity="1.0" Attack="5.0" Release="10.0" LinearMode="1.0">
+              <ChildProcessors>
+                <Processor Type="ModulatorChain" ID="Attack Time Modulation" Bypassed="0"
+                           Intensity="1.0">
+                  <ChildProcessors/>
+                </Processor>
+              </ChildProcessors>
+            </Processor>
+          </ChildProcessors>
+        </Processor>
+        <Processor Type="ModulatorChain" ID="PitchModulation" Bypassed="0" Intensity="0.0">
+          <ChildProcessors/>
+        </Processor>
+        <Processor Type="EffectChain" ID="FX" Bypassed="0">
+          <ChildProcessors/>
+        </Processor>
+      </ChildProcessors>
+      <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+    </Processor>
+  </ChildProcessors>
+  <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+  <macro_controls>
+    <macro name="Macro 1" value="0.0" midi_cc="-1"/>
+    <macro name="Macro 2" value="0.0" midi_cc="-1"/>
+    <macro name="Macro 3" value="0.0" midi_cc="-1"/>
+    <macro name="Macro 4" value="0.0" midi_cc="-1"/>
+    <macro name="Macro 5" value="0.0" midi_cc="-1"/>
+    <macro name="Macro 6" value="0.0" midi_cc="-1"/>
+    <macro name="Macro 7" value="0.0" midi_cc="-1"/>
+    <macro name="Macro 8" value="0.0" midi_cc="-1"/>
+  </macro_controls>
+  <MidiAutomation/>
+  <MPEData Enabled="0"/>
+</Processor>

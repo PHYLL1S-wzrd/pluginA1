@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentProperties DeviceType="Desktop">
+  <Component type="ScriptImage" id="Image1" x="0.0" y="0.0" width="800.0"
+             height="500.0" fileName="{PROJECT_FOLDER}18_BG_V6.png"/>
+  <Component type="ScriptSlider" id="MARS" x="613.0" y="210.0" filmstripImage="{PROJECT_FOLDER}otherKnob.png"
+             mode="NormalizedPercentage" suffix="%" middlePosition="0.5" text="ED MARS"
+             numStrips="128.0" width="105.0" height="105.0" tooltip="MARS"
+             showTextBox="0" scaleFactor="0.4000000059604645" mouseSensitivity="0.9"/>
+  <Component type="ScriptSlider" id="rose" x="346.0" y="210.0" text="d/rose"
+             mode="NormalizedPercentage" suffix="%" middlePosition="0.5" filmstripImage="{PROJECT_FOLDER}otherKnob.png"
+             numStrips="128.0" width="100.0" height="105.0" scaleFactor="0.4000000059604645"
+             showTextBox="0" tooltip="DROSE" mouseSensitivity="0.9"/>
+  <Component type="ScriptSlider" id="forty" x="82.0" y="210.0" text="4997"
+             middlePosition="0.5" filmstripImage="{PROJECT_FOLDER}4997Knob.png"
+             numStrips="128.0" width="105.0" height="105.0" scaleFactor="0.4000000059604645"
+             mode="NormalizedPercentage" suffix="%" showTextBox="0" tooltip="4997"
+             mouseSensitivity="0.9"/>
+  <Component type="ScriptButton" id="Link" x="130.0" y="370.0" scaleFactor="0.5"
+             width="90" height="110" filmstripImage="{PROJECT_FOLDER}Linknife.png"
+             numStrips="6"/>
+</ContentProperties>
