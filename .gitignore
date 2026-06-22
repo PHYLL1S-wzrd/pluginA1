@@ -1,1 +1,9 @@
+# Build outputs
+Builds/**/build/
+Builds/**/DerivedData/
 Binaries/
+*.app
+*.vst3
+*.o
+*.d
+.DS_Store
