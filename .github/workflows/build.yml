@@ -11,9 +11,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Inspect project structure
+      - name: Debug repo root
         run: |
-          ls -R Dorop/Builds/MacOSX
+          ls -R
 
       - name: Upload VST3
         uses: actions/upload-artifact@v4
