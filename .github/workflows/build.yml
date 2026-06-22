@@ -1,18 +1,27 @@
 name: Build Mac
+
 on:
   workflow_dispatch:
+
 jobs:
   build-mac:
     runs-on: macos-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - run: git clone --depth 1 https://github.com/christophhart/HISE.git hise-src
+
       - run: unzip hise-src/tools/SDK/sdk.zip -d hise-src/tools/SDK
+
       - run: |
           chmod +x "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer"
           "hise-src/tools/Projucer/Projucer.app/Contents/MacOS/Projucer" --resave "hise-src/projects/standalone/HISE Standalone.jucer"
+
       - run: xcodebuild -project "hise-src/projects/standalone/Builds/MacOSX/HISE Standalone.xcodeproj" -configuration Release
-      - run: "hise-src/projects/standalone/Builds/MacOSX/build/Release/HISE.app/Contents/MacOS/HISE" export_ci "$(pwd)/Dorop/XmlPresetBackups/dorop.xml" -t:instrument -p:VST3 -a:x64
+
+      - run: "${{ github.workspace }}/hise-src/projects/standalone/Builds/MacOSX/build/Release/HISE.app/Contents/MacOS/HISE" export_ci "${{ github.workspace }}/Dorop/Presets/Dorop.hip" -t:instrument -p:VST3 -a:x64
+
       - uses: actions/upload-artifact@v4
         with:
           name: plugin-mac
