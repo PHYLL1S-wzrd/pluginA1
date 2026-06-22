@@ -1,4 +1,4 @@
-name: Build Mac Plugin
+name: Build Mac VST3
 
 on:
   workflow_dispatch:
@@ -11,12 +11,27 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Debug repo root
-        run: |
-          ls -R
+      - name: Show repo structure (debug safe)
+        run: ls -R
 
-      - name: Upload VST3
+      - name: Build project
+        run: |
+          xcodebuild \
+            -project "Dorop/Builds/MacOSX/DoropEngine.xcodeproj" \
+            -configuration Release \
+            -alltargets
+
+      - name: Find VST3 output
+        run: |
+          echo "Searching for VST3..."
+          find . -name "*.vst3" || true
+
+      - name: Upload VST3 artifact
         uses: actions/upload-artifact@v4
         with:
           name: mac-vst3
-          path: "**/*.vst3"
+          path: |
+            **/*.vst3
+            **/build/**/*.vst3
+            **/Release/**/*.vst3
+            **/Debug/**/*.vst3
