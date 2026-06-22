@@ -1,4 +1,4 @@
-name: Build Mac VST3
+name: Build Mac VST3 (HISE)
 
 on:
   workflow_dispatch:
@@ -11,22 +11,29 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Show repo structure (debug safe)
-        run: ls -R
+      - name: Show project structure
+        run: ls -R Dorop/Builds/MacOSX
 
-      - name: Build project
+      - name: List Xcode schemes
+        run: |
+          xcodebuild \
+            -list \
+            -project "Dorop/Builds/MacOSX/DoropEngine.xcodeproj"
+
+      - name: Build (explicit scheme attempt)
         run: |
           xcodebuild \
             -project "Dorop/Builds/MacOSX/DoropEngine.xcodeproj" \
             -configuration Release \
-            -alltargets
+            -alltargets \
+            CODE_SIGNING_ALLOWED=NO
 
-      - name: Find VST3 output
+      - name: Find VST3
         run: |
           echo "Searching for VST3..."
           find . -name "*.vst3" || true
 
-      - name: Upload VST3 artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: mac-vst3
@@ -34,4 +41,3 @@ jobs:
             **/*.vst3
             **/build/**/*.vst3
             **/Release/**/*.vst3
-            **/Debug/**/*.vst3
